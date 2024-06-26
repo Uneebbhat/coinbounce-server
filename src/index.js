@@ -1,7 +1,13 @@
+import { config } from "dotenv";
 import express from "express";
+import dbConnect from "./config/dbConnect.js";
 
 const app = express();
-const port = 5000;
+
+config();
+dbConnect();
+
+const port = process.env.PORT || 5001;
 
 app.get("/", (req, res) => {
   console.log("Hello, world");
