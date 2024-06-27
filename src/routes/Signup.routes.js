@@ -6,13 +6,12 @@ import { v2 as cloudinary } from "cloudinary";
 import { config } from "dotenv";
 import multer from "multer";
 import jwt from "jsonwebtoken";
-
 import cloudinaryUpload from "../utils/cloudinaryUpload.js";
+
+config();
 
 const route = Router();
 const upload = multer({ dest: "uploads/" });
-
-config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -71,7 +70,11 @@ route.post(
 
       if (newUser) {
         const token = jwt.sign(
-          { userId: newUser._id },
+          {
+            userId: newUser._id,
+            name: newUser.name,
+            userImg: newUser.profilePic,
+          },
           process.env.JWT_SECRET,
           { expiresIn: "1d" }
         );
