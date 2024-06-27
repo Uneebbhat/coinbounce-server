@@ -1,17 +1,16 @@
 import { Router } from "express";
 import { config } from "dotenv";
 import Blog from "../models/Blog.model.js";
-import authentication from "../middleware/authentication.middleware.js";
-import jwt from "jsonwebtoken";
 
 const route = Router();
 
 config();
 
-route.get("/get-blogs", async (req, res) => {
+route.get("/get-blog/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const getALlBLogs = await Blog.find().sort({ createdAt: -1 });
-    return res.status(200).json({ success: true, data: getALlBLogs });
+    const getBlogByID = await Blog.findById(id);
+    return res.status(200).json({ success: true, data: getBlogByID });
   } catch (e) {
     return res
       .status(500)
