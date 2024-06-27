@@ -13,6 +13,6 @@
     }
   ],
   "env": {
-    "MY_SECRET": "@my-secret"
+    "MY_SECRET": "@env.MY_SECRET"
   }
 }
