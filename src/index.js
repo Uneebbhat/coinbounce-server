@@ -31,7 +31,7 @@ app.use("/api", getBlogByID);
 app.use("/api", getCurrentUser);
 
 app.get("/", (req, res) => {
-  res.send("Hello Wolrd");
+  res.send("Hello world");
 });
 
 app.listen(port, () => {
