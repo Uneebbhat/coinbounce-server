@@ -24,11 +24,7 @@ route.post(
   authentication,
   async (req, res) => {
     const { blogTitle, blogDesc } = req.body;
-    const { userId, name, userImg } = req.user;
-
-    console.log(req.user.userId);
-    console.log(req.user.name);
-    console.log(req.user.userImg);
+    const { user } = req.user;
 
     if (!blogTitle || !blogDesc) {
       return res
@@ -49,14 +45,14 @@ route.post(
         blogTitle,
         blogDesc,
         blogImg: blogImgUrl,
-        userId,
-        name,
-        userImg,
+        userId: user._id,
+        name: user.name,
+        userImg: user.profilePic,
       });
 
       if (blog) {
         const token = jwt.sign(
-          { userId: userId._id, name, userImg },
+          { userId: user._id, name: user.name, userImg: user.profilePic },
           process.env.JWT_SECRET,
           {
             expiresIn: "1d",
