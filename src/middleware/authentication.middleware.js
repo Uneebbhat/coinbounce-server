@@ -27,9 +27,7 @@ const authentication = async (req, res, next) => {
       }
 
       req.user = {
-        userId: user._id,
-        name: user.name,
-        userImg: user.profilePic,
+        user,
       };
 
       next();

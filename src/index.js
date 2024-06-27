@@ -7,6 +7,7 @@ import loginRoute from "./routes/Login.routes.js";
 import createBlogRoute from "./routes/CreateBlog.routes.js";
 import getAllBlogsRoute from "./routes/GetAllBlogs.routes.js";
 import getBlogByID from "./routes/GetBlogByID.routes.js";
+import getCurrentUser from "./routes/GetCurrentUser.routes.js";
 import getNewsRoute from "./routes/GetNews.routes.js";
 import cookieParser from "cookie-parser";
 
@@ -27,9 +28,10 @@ app.use("/api", createBlogRoute);
 app.use("/api", getAllBlogsRoute);
 app.use("/api", getNewsRoute);
 app.use("/api", getBlogByID);
+app.use("/api", getCurrentUser);
 
 app.get("/", (req, res) => {
-  console.log("Hello, world");
+  res.send("Hello Wolrd");
 });
 
 app.listen(port, () => {
