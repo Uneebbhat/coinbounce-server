@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "src/index.js"
     }
-  ],
-  "env": {
-    "MY_SECRET": "@env.MY_SECRET"
-  }
+  ]
 }
