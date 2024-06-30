@@ -9,6 +9,8 @@ import getAllBlogsRoute from "./routes/GetAllBlogs.routes.js";
 import getBlogByID from "./routes/GetBlogByID.routes.js";
 import getCurrentUser from "./routes/GetCurrentUser.routes.js";
 import getNewsRoute from "./routes/GetNews.routes.js";
+import profileRoute from "./routes/Profile.routes.js";
+import userBlogRoute from "./routes/GetUserBlog.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -29,6 +31,8 @@ app.use("/api", getAllBlogsRoute);
 app.use("/api", getNewsRoute);
 app.use("/api", getBlogByID);
 app.use("/api", getCurrentUser);
+app.use("/api", profileRoute);
+app.use("/api", userBlogRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
