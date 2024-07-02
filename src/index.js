@@ -24,6 +24,10 @@ app.use(cookieParser());
 
 const port = process.env.PORT || 5001;
 
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
 app.use("/api", signupRoute);
 app.use("/api", loginRoute);
 app.use("/api", createBlogRoute);
@@ -33,10 +37,6 @@ app.use("/api", getBlogByID);
 app.use("/api", getCurrentUser);
 app.use("/api", profileRoute);
 app.use("/api", userBlogRoute);
-
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
