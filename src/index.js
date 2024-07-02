@@ -1,5 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
+import { serverless } from "serverless-http";
 import cors from "cors";
 import dbConnect from "./config/dbConnect.js";
 import signupRoute from "./routes/Signup.routes.js";
@@ -14,6 +15,7 @@ import userBlogRoute from "./routes/GetUserBlog.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
+const server = serverless(app);
 
 config();
 dbConnect();
@@ -41,3 +43,5 @@ app.use("/api", userBlogRoute);
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
+
+export default app;
