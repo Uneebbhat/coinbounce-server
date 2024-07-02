@@ -25,7 +25,7 @@ app.use(cookieParser());
 const port = process.env.PORT || 5001;
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.json({ message: "Hello, world!" });
 });
 
 app.use("/api", signupRoute);
