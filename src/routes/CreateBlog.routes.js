@@ -32,6 +32,7 @@ route.post(
         .json({ success: false, message: "All fields are required" });
     }
 
+    console.log(req.file);
     let blogImgUrl = null;
     if (req.file) {
       const result = await cloudinaryUpload(req.file.path, {
