@@ -11,7 +11,8 @@ import getCurrentUser from "./routes/GetCurrentUser.routes.js";
 import getNewsRoute from "./routes/GetNews.routes.js";
 import profileRoute from "./routes/Profile.routes.js";
 import userBlogRoute from "./routes/GetUserBlog.routes.js";
-import deleteBlogRoute from "./routes/DeteleBlog.route.js";
+import deleteBlogRoute from "./routes/DeteleBlog.routes.js";
+import editBlogRoute from "./routes/EditBlog.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/api", getCurrentUser);
 app.use("/api", profileRoute);
 app.use("/api", userBlogRoute);
 app.use("/api", deleteBlogRoute);
+app.use("/api", editBlogRoute);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
