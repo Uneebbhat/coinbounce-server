@@ -2,8 +2,8 @@ import { Router } from "express";
 import { body, validationResult } from "express-validator";
 import User from "../models/User.model.js";
 import bcrypt from "bcrypt";
-import { config } from "dotenv";
 import jwt from "jsonwebtoken";
+import { config } from "dotenv";
 
 const route = Router();
 
@@ -51,14 +51,25 @@ route.post(
           .json({ success: false, message: "Invalid credentials" });
       }
 
+      // Determine role based on email domain
+      let role = "user"; // Default role
+      if (email.endsWith("@admin.com")) {
+        role = "admin";
+      }
+
       const token = jwt.sign(
-        { userId: existingUser._id },
+        {
+          userId: existingUser._id,
+          name: existingUser.name,
+          userImg: existingUser.profilePic,
+          role: role, // Include role in JWT payload
+        },
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
       );
       res.cookie("token", token, { httpOnly: true });
 
-      return res.status(201).json({ success: true, existingUser, token });
+      return res.status(200).json({ success: true, existingUser, token });
     } catch (e) {
       console.error("Error signing in:", e);
       return res

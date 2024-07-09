@@ -2,10 +2,10 @@ import { Router } from "express";
 import { body, validationResult } from "express-validator";
 import User from "../models/User.model.js";
 import bcrypt from "bcrypt";
-import { v2 as cloudinary } from "cloudinary";
+import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import multer from "multer";
-import jwt from "jsonwebtoken";
+import { v2 as cloudinary } from "cloudinary";
 import cloudinaryUpload from "../utils/cloudinaryUpload.js";
 
 config();
@@ -61,11 +61,18 @@ route.post(
         profilePicUrl = result.secure_url;
       }
 
+      // Determine role based on email domain
+      let role = "user"; // Default role
+      if (email.endsWith("@admin.com")) {
+        role = "admin";
+      }
+
       const newUser = await User.create({
         profilePic: profilePicUrl,
         email,
         name,
         password: hashPass,
+        role,
       });
 
       if (newUser) {
@@ -74,6 +81,7 @@ route.post(
             userId: newUser._id,
             name: newUser.name,
             userImg: newUser.profilePic,
+            role: newUser.role, // Include role in JWT payload
           },
           process.env.JWT_SECRET,
           { expiresIn: "1d" }
