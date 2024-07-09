@@ -14,6 +14,7 @@ import userBlogRoute from "./routes/GetUserBlog.routes.js";
 import deleteBlogRoute from "./routes/DeteleBlog.routes.js";
 import editBlogRoute from "./routes/EditBlog.routes.js";
 import editProfileRoute from "./routes/EditProfile.routes.js";
+import dashboardRoute from "./routes/Dashboard.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api", userBlogRoute);
 app.use("/api", deleteBlogRoute);
 app.use("/api", editBlogRoute);
 app.use("/api", editProfileRoute);
+app.use("/api", dashboardRoute);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
